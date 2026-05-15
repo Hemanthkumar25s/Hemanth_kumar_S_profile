@@ -6,7 +6,8 @@ import { useState } from 'react'
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
-  const [toast, setToast] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalMessage, setModalMessage] = useState('')
 
   const handleChange = (e: any) => {
     setFormData({
@@ -23,10 +24,8 @@ export default function Contact() {
 
     window.open(gmailLink, '_blank')
     setSubmitted(true)
-    setToast('Your message is prepared in Gmail. Please send it from the Gmail window.')
-
-    setTimeout(() => setSubmitted(false), 3000)
-    setTimeout(() => setToast(''), 5000)
+    setModalMessage('Your message has been prepared in Gmail. Please send it from the Gmail window.')
+    setModalOpen(true)
   }
 
   const containerVariants = {
@@ -174,11 +173,6 @@ export default function Contact() {
               <h3 className="text-2xl font-bold text-white">Send a Message</h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                {toast ? (
-                  <div className="rounded-lg border border-accent/30 bg-accent/10 p-4 text-sm text-cyan-200">
-                    {toast}
-                  </div>
-                ) : null}
                 {/* Name input */}
                 <motion.div
                   whileFocus={{ scale: 1.02 }}
@@ -275,6 +269,21 @@ export default function Contact() {
           </motion.div>
         </motion.div>
       </div>
+      {modalOpen ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+          <div className="max-w-md w-full rounded-3xl bg-slate-950/95 border border-accent/30 p-6 text-white shadow-2xl">
+            <h4 className="text-xl font-semibold mb-3">Message Ready</h4>
+            <p className="text-sm text-gray-300 mb-6">{modalMessage}</p>
+            <button
+              type="button"
+              onClick={() => setModalOpen(false)}
+              className="w-full px-5 py-3 bg-gradient-to-r from-accent to-blue-400 text-slate-950 font-semibold rounded-full hover:opacity-90 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   )
 }
