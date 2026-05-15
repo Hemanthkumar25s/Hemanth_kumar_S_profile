@@ -111,11 +111,10 @@ export default function Hero() {
             <motion.a
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 247, 255, 0.2)' }}
               whileTap={{ scale: 0.95 }}
-              href="/resume.pdf"
+              href="/resume"
               className="px-8 py-3 border-2 border-accent text-accent font-bold rounded-lg hover:bg-accent/10"
-              download
             >
-              Download Resume
+              View Resume
             </motion.a>
             <motion.a
               whileHover={{ scale: 1.05, borderColor: '#00F7FF' }}
