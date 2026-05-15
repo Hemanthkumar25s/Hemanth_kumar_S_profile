@@ -6,6 +6,7 @@ import { useState } from 'react'
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [toast, setToast] = useState('')
 
   const handleChange = (e: any) => {
     setFormData({
@@ -16,10 +17,16 @@ export default function Contact() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    const mailtoLink = `mailto:hemanthkumar.s3125@gmail.com?subject=${encodeURIComponent(`Message from ${formData.name}`)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`
-    window.location.href = mailtoLink
+    const subject = `Message from ${formData.name}`
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=hemanthkumar.s3125@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+    window.open(gmailLink, '_blank')
     setSubmitted(true)
+    setToast('Your message is prepared in Gmail. Please send it from the Gmail window.')
+
     setTimeout(() => setSubmitted(false), 3000)
+    setTimeout(() => setToast(''), 5000)
   }
 
   const containerVariants = {
@@ -116,7 +123,7 @@ export default function Contact() {
                   icon: GmailLogo,
                   title: 'Email',
                   value: 'hemanthkumar.s3125@gmail.com',
-                  href: 'mailto:hemanthkumar.s3125@gmail.com',
+                  href: 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=hemanthkumar.s3125@gmail.com',
                 },
                 {
                   icon: LocationLogo,
@@ -167,6 +174,11 @@ export default function Contact() {
               <h3 className="text-2xl font-bold text-white">Send a Message</h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {toast ? (
+                  <div className="rounded-lg border border-accent/30 bg-accent/10 p-4 text-sm text-cyan-200">
+                    {toast}
+                  </div>
+                ) : null}
                 {/* Name input */}
                 <motion.div
                   whileFocus={{ scale: 1.02 }}
@@ -244,7 +256,7 @@ export default function Contact() {
               {[
                 { Component: GitHubLogo, label: 'GitHub', href: 'https://github.com/Hemanthkumar25s' },
                 { Component: LinkedInLogo, label: 'LinkedIn', href: 'https://linkedin.com/in/hemanthkumars25' },
-                { Component: GmailLogo, label: 'Gmail', href: 'mailto:hemanthkumar.s3125@gmail.com' },
+                { Component: GmailLogo, label: 'Gmail', href: 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=hemanthkumar.s3125@gmail.com' },
               ].map((social, idx) => (
                 <motion.a
                   key={idx}
