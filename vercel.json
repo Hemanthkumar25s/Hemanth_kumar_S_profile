@@ -1,4 +1,9 @@
 {
   "version": 2,
-  "rootDirectory": "portfolio"
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
