@@ -1,17 +1,20 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 export default function Navbar() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Skills', href: '/skills' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   return (
@@ -32,16 +35,24 @@ export default function Navbar() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex gap-8">
-            {navItems.map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                whileHover={{ y: -2, color: '#00F7FF' }}
-                className="text-sm font-medium hover:text-accent transition-colors"
-              >
-                {item.label}
-              </motion.a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <motion.div
+                  key={item.label}
+                  whileHover={{ y: -2, color: '#00F7FF' }}
+                >
+                  <Link
+                    href={item.href}
+                    className={`text-sm font-medium transition-colors ${
+                      isActive ? 'text-accent' : 'text-gray-300 hover:text-accent'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              )
+            })}
           </div>
 
           {/* Mobile menu button */}
@@ -62,16 +73,21 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             className="md:hidden pb-4"
           >
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="block py-2 text-sm font-medium hover:text-accent transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`block py-2 text-sm font-medium transition-colors ${
+                    isActive ? 'text-accent' : 'text-gray-300 hover:text-accent'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
           </motion.div>
         )}
       </div>

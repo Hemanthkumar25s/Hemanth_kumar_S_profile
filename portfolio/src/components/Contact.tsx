@@ -5,9 +5,9 @@ import { useState } from 'react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle')
+  const [feedback, setFeedback] = useState('')
   const [modalOpen, setModalOpen] = useState(false)
-  const [modalMessage, setModalMessage] = useState('')
 
   const handleChange = (e: any) => {
     setFormData({
@@ -16,16 +16,35 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const subject = `Message from ${formData.name}`
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=hemanthkumar.s3125@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-
-    window.open(gmailLink, '_blank')
-    setSubmitted(true)
-    setModalMessage('Your message has been prepared in Gmail. Please send it from the Gmail window.')
+    setStatus('loading')
+    setFeedback('Sending your message...')
     setModalOpen(true)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data?.error || 'Unable to send your message. Please try again.')
+      }
+
+      setStatus('success')
+      setFeedback('Your message has been sent successfully. I will reply soon.')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      setStatus('error')
+      setFeedback(
+        'Sorry, something went wrong. Please try again or email me directly at hemanthkumar.s3125@gmail.com.'
+      )
+    }
   }
 
   const containerVariants = {
@@ -224,14 +243,19 @@ export default function Contact() {
                   />
                 </motion.div>
 
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  Privacy notice: Your email address and message are used only to reply to your inquiry and will not be shared with third parties.
+                </p>
+
                 {/* Submit button */}
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 247, 255, 0.4)' }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-accent to-blue-400 text-dark font-bold rounded-lg hover:shadow-lg transition-all"
+                  disabled={status === 'loading'}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-accent to-blue-400 text-dark font-bold rounded-lg hover:shadow-lg transition-all disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {submitted ? '✓ Message Ready!' : 'Send Message'}
+                  {status === 'loading' ? 'Sending...' : 'Send Message'}
                 </motion.button>
               </form>
             </motion.div>
@@ -272,8 +296,10 @@ export default function Contact() {
       {modalOpen ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
           <div className="max-w-md w-full rounded-3xl bg-slate-950/95 border border-accent/30 p-6 text-white shadow-2xl">
-            <h4 className="text-xl font-semibold mb-3">Message Ready</h4>
-            <p className="text-sm text-gray-300 mb-6">{modalMessage}</p>
+            <h4 className="text-xl font-semibold mb-3">
+              {status === 'success' ? 'Message Sent' : status === 'error' ? 'Send Failed' : 'Sending Message'}
+            </h4>
+            <p className="text-sm text-gray-300 mb-6">{feedback}</p>
             <button
               type="button"
               onClick={() => setModalOpen(false)}

@@ -93,3 +93,21 @@ a, button {
 .pulse-glow {
   animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+.section-heading {
+  color: #E0E6FF;
+}
+
+.section-lead {
+  color: #94A3B8;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #00F7FF 0%, #3B82F6 100%);
+  color: #0F172A;
+}
+
+.btn-secondary {
+  border-color: rgba(0, 247, 255, 0.4);
+  color: #00F7FF;
+}

@@ -3,7 +3,13 @@ import '../globals.css'
 
 export const metadata: Metadata = {
   title: 'Hemanth Kumar S - Student Developer',
-  description: 'Portfolio of Hemanth Kumar S - Full Stack Developer, Mobile Developer, AI Enthusiast',
+  description: 'Portfolio of Hemanth Kumar S, showcasing web and mobile development, AI projects, and professional experience.',
+  keywords: ['portfolio', 'Hemanth Kumar', 'web developer', 'mobile developer', 'AI', 'Next.js', 'Kotlin', 'React'],
+  openGraph: {
+    title: 'Hemanth Kumar S - Student Developer',
+    description: 'Portfolio of Hemanth Kumar S, showcasing web and mobile development, AI projects, and professional experience.',
+    type: 'website',
+  },
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" fill="%2300F7FF">H</text></svg>',
   },

@@ -98,20 +98,29 @@ export default function Hero() {
 
           <motion.div
             variants={itemVariants}
-            className="flex gap-4 pt-4"
+            className="flex flex-col sm:flex-row gap-4 pt-4"
           >
             <motion.a
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 247, 255, 0.4)' }}
               whileTap={{ scale: 0.95 }}
-              href="#projects"
+              href="/projects"
               className="px-8 py-3 bg-gradient-to-r from-accent to-blue-400 text-dark font-bold rounded-lg hover-glow"
             >
               View Projects
             </motion.a>
             <motion.a
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 247, 255, 0.2)' }}
+              whileTap={{ scale: 0.95 }}
+              href="/resume.pdf"
+              className="px-8 py-3 border-2 border-accent text-accent font-bold rounded-lg hover:bg-accent/10"
+              download
+            >
+              Download Resume
+            </motion.a>
+            <motion.a
               whileHover={{ scale: 1.05, borderColor: '#00F7FF' }}
               whileTap={{ scale: 0.95 }}
-              href="#contact"
+              href="/contact"
               className="px-8 py-3 border-2 border-accent text-accent font-bold rounded-lg hover:bg-accent/10"
             >
               Get in Touch

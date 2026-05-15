@@ -44,11 +44,11 @@ export default function Footer() {
               <h4 className="font-semibold text-white">Quick Links</h4>
               <ul className="space-y-2">
                 {[
-                  { label: 'Home', href: '#home' },
-                  { label: 'About', href: '#about' },
-                  { label: 'Skills', href: '#skills' },
-                  { label: 'Projects', href: '#projects' },
-                  { label: 'Contact', href: '#contact' },
+                  { label: 'Home', href: '/' },
+                  { label: 'About', href: '/about' },
+                  { label: 'Skills', href: '/skills' },
+                  { label: 'Projects', href: '/projects' },
+                  { label: 'Contact', href: '/contact' },
                 ].map((link) => (
                   <li key={link.label}>
                     <motion.a
@@ -106,10 +106,6 @@ export default function Footer() {
             className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400"
           >
             <p>© {currentYear} Hemanth Kumar S. All rights reserved.</p>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-accent transition-colors">Terms of Service</a>
-            </div>
           </motion.div>
         </motion.div>
       </div>

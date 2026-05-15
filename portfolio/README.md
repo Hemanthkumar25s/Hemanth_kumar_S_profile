@@ -188,6 +188,8 @@ After deploying to Vercel:
 2. Add your custom domain
 3. Update DNS records as instructed by Vercel
 
+> Note: Custom domains are configured in the Vercel dashboard, not inside the repo code.
+
 ## 📱 Responsive Breakpoints
 
 - Mobile: < 768px
@@ -199,7 +201,11 @@ After deploying to Vercel:
 Create a `.env.local` file if needed:
 ```
 NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=your_analytics_id
+FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
 ```
+
+- `FORMSPREE_ENDPOINT` should point to your Formspree form API endpoint.
+- Replace `your-form-id` with your actual Formspree form ID.
 
 ## 🎯 SEO Optimization
 

@@ -1,14 +1,12 @@
 import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import WhatIDo from '@/components/WhatIDo'
+import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
-export default function Home() {
+export default function ContactPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-dark via-darker to-dark overflow-hidden">
       <Navbar />
-      <Hero />
-      <WhatIDo />
+      <Contact />
       <Footer />
     </main>
   )
