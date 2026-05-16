@@ -79,9 +79,10 @@ export default function About() {
             {/* Left side - Text */}
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="text-gray-300 text-lg leading-relaxed">
-                I'm a passionate developer from Bangalore, currently pursuing my B.E. in Information Science and Engineering. 
-                With a strong foundation in full-stack development and mobile app creation, I'm dedicated to building scalable, 
-                practical solutions that solve real-world problems.
+                I'm a passionate developer from Bangalore, 
+                currently pursuing a B.E. in Information Science and Engineering and a proud Reliance Foundation Scholar (2022–26). 
+                With a strong foundation in full-stack and mobile app development, I focus on building scalable, 
+                user-centric solutions that solve real-world problems.
               </p>
 
               <p className="text-gray-300 text-lg leading-relaxed">

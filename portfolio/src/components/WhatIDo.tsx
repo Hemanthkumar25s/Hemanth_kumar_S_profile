@@ -20,14 +20,14 @@ export default function WhatIDo() {
     <section className="relative py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center space-y-4 mb-12">
-          <p className="text-sm uppercase tracking-[0.3em] text-accent">What I Do</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-accent">Who I am</p>
           <h2 className="text-4xl md:text-5xl font-bold section-heading">
             <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">
-              Services I Offer
+              Areas of Expertise
             </span>
           </h2>
           <p className="max-w-2xl mx-auto section-lead text-lg">
-            I help founders and teams launch polished digital products with clean design, strong performance, and scalable architecture.
+            I build modern web and Android applications with clean design, scalable architecture, and seamless user experiences using full-stack technologies
           </p>
         </div>
 
