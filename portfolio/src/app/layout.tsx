@@ -2,13 +2,37 @@ import type { Metadata } from 'next'
 import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'Hemanth Kumar S - Student Developer',
-  description: 'Portfolio of Hemanth Kumar S, showcasing web and mobile development, AI projects, and professional experience.',
-  keywords: ['portfolio', 'Hemanth Kumar', 'web developer', 'mobile developer', 'AI', 'Next.js', 'Kotlin', 'React'],
+  title: {
+    default: 'Hemanth Kumar S - Student Developer & Portfolio',
+    template: '%s | Hemanth Kumar S',
+  },
+  description:
+    'Portfolio of Hemanth Kumar S, a student developer building web and mobile applications with Next.js, React, Android, Kotlin, and modern UI design.',
+  keywords: [
+    'Hemanth Kumar S',
+    'Hemanth Kumar portfolio',
+    'student developer',
+    'web developer',
+    'mobile developer',
+    'Next.js',
+    'React',
+    'Kotlin',
+    'Android',
+    'Tailwind CSS',
+    'Framer Motion',
+  ],
   openGraph: {
-    title: 'Hemanth Kumar S - Student Developer',
-    description: 'Portfolio of Hemanth Kumar S, showcasing web and mobile development, AI projects, and professional experience.',
+    title: 'Hemanth Kumar S - Student Developer & Portfolio',
+    description:
+      'Portfolio of Hemanth Kumar S, showcasing web and mobile app development, Android projects, React/Next.js work, and technical skills.',
     type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hemanth Kumar S - Student Developer & Portfolio',
+    description:
+      'Portfolio of Hemanth Kumar S, showcasing web and mobile app development, Android projects, React/Next.js work, and technical skills.',
   },
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" fill="%2300F7FF">H</text></svg>',

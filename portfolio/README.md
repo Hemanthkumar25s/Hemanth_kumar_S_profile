@@ -1,270 +1,64 @@
-# Hemanth Kumar S - Portfolio Website
+# Hemanth Kumar S — Portfolio Website
 
-A modern, animated portfolio website built with Next.js, React, TypeScript, and Framer Motion. Features smooth animations, glassmorphic design, and responsive layout.
-
-## 🚀 Features
-
-- **Smooth Animations**: Text animations, page transitions, and interactive elements
-- **Responsive Design**: Fully responsive from mobile to desktop
-- **Dark Theme**: Modern dark UI with cyan and blue accents
-- **Fast Performance**: Built with Next.js for optimal performance
-- **SEO Ready**: Optimized metadata and structured content
-- **Glassmorphism**: Modern UI with frosted glass effect
-- **Smooth Scroll**: Scroll-based animations and reveal effects
-- **Mobile Menu**: Responsive hamburger menu for mobile devices
-
-## 📋 Sections
-
-1. **Navbar** - Fixed navigation with smooth animations
-2. **Hero** - Eye-catching introduction with profile image
-3. **About** - Background and education information
-4. **Skills** - Technical expertise and proficiency levels
-5. **Projects** - Featured projects with GitHub links
-6. **Contact** - Contact form and social links
-7. **Footer** - Quick links and additional information
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Image Optimization**: Next.js Image component
-- **Deployment**: Vercel
-
-## 📦 Installation
-
-### Prerequisites
-- Node.js 16.x or higher
-- npm or yarn
-
-### Setup Instructions
-
-1. **Clone or Extract the Project**
-   ```bash
-   cd portfolio
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Run Development Server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-4. **Build for Production**
-   ```bash
-   npm run build
-   npm start
-   # or
-   yarn build
-   yarn start
-   ```
-
-## 🚀 Deployment to Vercel
-
-### Method 1: Using Vercel CLI (Recommended)
-
-1. **Install Vercel CLI**
-   ```bash
-   npm i -g vercel
-   ```
-
-2. **Login to Vercel**
-   ```bash
-   vercel login
-   ```
-
-3. **Deploy**
-   ```bash
-   vercel
-   ```
-   Follow the prompts and select the appropriate options.
-
-### Method 2: GitHub Integration (Easiest)
-
-1. **Push to GitHub**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/portfolio.git
-   git push -u origin main
-   ```
-
-2. **Connect to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Select your GitHub repository
-   - Click "Import"
-   - Configure project settings (mostly defaults work)
-   - Click "Deploy"
-
-3. **Automatic Deployments**
-   - Every push to the main branch will automatically deploy
-
-### Method 3: Manual Vercel Dashboard Upload
-
-1. Go to [vercel.com/new](https://vercel.com/new)
-2. Select "Other" when asked about your codebase
-3. Upload your project folder
-4. Configure settings and deploy
-
-## 🎨 Customization
-
-### Update Profile Information
-
-Edit `/src/components/Hero.tsx`:
-```typescript
-// Update name, title, and description
-<span className="bg-gradient-to-r from-accent via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-  Your Name
-</span>
-```
-
-### Update Profile Image
-
-Replace the image URL in `/src/components/Hero.tsx`:
-```typescript
-src="https://your-image-url-here"
-```
-
-### Modify Skills
-
-Edit `/src/components/Skills.tsx`:
-```typescript
-const skillCategories = [
-  {
-    category: 'Your Category',
-    icon: '🎯',
-    skills: ['Skill1', 'Skill2', 'Skill3'],
-  },
-  // Add more categories
-]
-```
-
-### Update Projects
-
-Edit `/src/components/Projects.tsx`:
-```typescript
-const projects = [
-  {
-    title: 'Your Project',
-    description: 'Project description',
-    tags: ['Tech1', 'Tech2'],
-    status: 'Completed',
-    link: 'https://github.com/yourrepo',
-    color: 'from-color1 to-color2',
-  },
-  // Add more projects
-]
-```
-
-### Change Colors
-
-Update CSS variables in `/tailwind.config.js`:
-```javascript
-colors: {
-  accent: '#00F7FF', // Cyan
-  dark: '#0A0E27',   // Dark background
-  darker: '#050810', // Darker background
-  card: '#111830',   // Card background
-}
-```
-
-### Add Custom Domain
-
-After deploying to Vercel:
-1. Go to Project Settings → Domains
-2. Add your custom domain
-3. Update DNS records as instructed by Vercel
-
-> Note: Custom domains are configured in the Vercel dashboard, not inside the repo code.
-
-## 📱 Responsive Breakpoints
-
-- Mobile: < 768px
-- Tablet: 768px - 1024px
-- Desktop: > 1024px
-
-## 🔧 Environment Variables
-
-Create a `.env.local` file if needed:
-```
-NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=your_analytics_id
-FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
-```
-
-- `FORMSPREE_ENDPOINT` should point to your Formspree form API endpoint.
-- Replace `your-form-id` with your actual Formspree form ID.
-
-## 🎯 SEO Optimization
-
-- Meta descriptions set in `/src/app/layout.tsx`
-- Open Graph tags ready (can be added to layout)
-- Sitemap auto-generated by Next.js
-- Mobile-friendly responsive design
-
-## 📊 Performance
-
-- **Core Web Vitals**: Optimized
-- **Image Optimization**: Using Next.js Image component
-- **Code Splitting**: Automatic by Next.js
-- **CSS**: Minified by Tailwind CSS
-- **Bundle Size**: Optimized for fast loading
-
-## 🐛 Troubleshooting
-
-### Port Already in Use
-```bash
-# Windows
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-
-# Mac/Linux
-lsof -i :3000
-kill -9 <PID>
-```
-
-### Build Errors
-```bash
-# Clear cache and reinstall
-rm -rf .next node_modules
-npm install
-npm run build
-```
-
-### Image Not Loading
-- Ensure image URL is accessible
-- Check image domain in `next.config.js`
-
-## 📝 License
-
-This project is free to use and modify for personal use.
-
-## 🤝 Support
-
-For issues or questions:
-- Email: hemanthkumar.s3125@gmail.com
-- GitHub: https://github.com/Hemanthkumar25s
-- LinkedIn: https://linkedin.com/in/hemanthkumars25
-
-## 📚 Resources
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Vercel Deployment](https://vercel.com/docs)
+> A polished personal portfolio for a student developer showcasing web and mobile app work with modern UI.
 
 ---
 
-**Made with ❤️ by Hemanth Kumar S**
+## 🌐 Live Website
+[https://hemanth-kumar-s-profile.vercel.app/](https://hemanth-kumar-s-profile.vercel.app/)
+
+---
+
+## ✨ Portfolio Overview
+This site is a dark-themed portfolio built to present:
+
+- A strong personal brand for **Hemanth Kumar S**
+- A modern UI with smooth animations and glassmorphism
+- Clear links to projects, resume, and contact details
+- Responsive presentation on desktop and mobile
+
+## 👨‍💻 About Hemanth
+Hemanth is a student developer focused on building thoughtful web and mobile experiences.
+
+He brings together:
+
+- **React / Next.js** for web interfaces
+- **Android / Kotlin** for mobile development
+- **Tailwind CSS** for polished styling
+- **Framer Motion** for animated interactions
+
+He builds practical solutions with clean design, fast performance, and real-world usability.
+
+## 🧩 What this portfolio includes
+
+- **Home**: Introduction, profile highlight, and quick links
+- **About**: Personal background and goals
+- **Skills**: Technical strengths and core competencies
+- **Projects**: Featured work with descriptions and links
+- **Contact**: Email, GitHub, LinkedIn, and messaging
+
+## 🎨 UI Highlights
+
+- Dark, modern theme with cyan/blue accents
+- Glassmorphic cards and sections
+- Smooth animated transitions
+- Accessible, responsive layout
+
+## 🛠️ Tech Stack
+
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion**
+
+---
+
+## 📌 Contact
+
+- **Email:** hemanthkumar.s3125@gmail.com
+- **GitHub:** https://github.com/Hemanthkumar25s
+- **LinkedIn:** https://linkedin.com/in/hemanthkumars25
+
+---
+
+*Designed to look and feel like a portfolio landing page, with a clean and readable UI-style README.*
