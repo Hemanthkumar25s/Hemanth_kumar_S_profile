@@ -1,7 +1,98 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Typewriter from './Typewriter'
+
+function EducationCard({ edu, idx }: { edu: { title: string; field: string; school: string; status: string }; idx: number }) {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 })
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 })
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['12deg', '-12deg'])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-12deg', '12deg'])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    x.set((e.clientX - rect.left) / rect.width - 0.5)
+    y.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: idx * 0.12 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+        perspective: 1000,
+      }}
+      className="group relative"
+    >
+      {/* Animated gradient border ring */}
+      <motion.div
+        animate={{
+          background: [
+            'linear-gradient(45deg, rgba(0,247,255,0.4), rgba(99,102,241,0.3), rgba(168,85,247,0.3), rgba(0,247,255,0.4))',
+            'linear-gradient(225deg, rgba(0,247,255,0.4), rgba(99,102,241,0.3), rgba(168,85,247,0.3), rgba(0,247,255,0.4))',
+            'linear-gradient(45deg, rgba(0,247,255,0.4), rgba(99,102,241,0.3), rgba(168,85,247,0.3), rgba(0,247,255,0.4))',
+          ],
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+        className="absolute -inset-[1.5px] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
+        style={{ zIndex: 0 }}
+      />
+
+      {/* Flowing gradient background */}
+      <motion.div
+        animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-15 transition-opacity duration-500"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0,247,255,0.15), rgba(99,102,241,0.1), rgba(168,85,247,0.1))',
+          backgroundSize: '200% 200%',
+        }}
+      />
+
+      {/* Shimmer scan line */}
+      <motion.div
+        animate={{
+          top: ['-10%', '110%'],
+          opacity: [0, 0.5, 0],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.3 }}
+        className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      />
+
+      <div
+        className="relative p-6 glassmorphism rounded-xl border border-accent/20 group-hover:border-accent/50 transition-all duration-300"
+        style={{ transformStyle: 'preserve-3d', transform: 'translateZ(20px)' }}
+      >
+        <div className="flex items-start justify-between gap-4" style={{ transformStyle: 'preserve-3d', transform: 'translateZ(30px)' }}>
+          <div className="space-y-2">
+            <h4 className="text-xl font-bold text-accent group-hover:text-cyan-300 transition-colors">{edu.title}</h4>
+            <p className="text-lg text-gray-200">{edu.field}</p>
+            <p className="text-gray-400">{edu.school}</p>
+          </div>
+          <div className="px-4 py-2 bg-accent/10 border border-accent/30 rounded-lg" style={{ transformStyle: 'preserve-3d', transform: 'translateZ(40px)' }}>
+            <p className="text-sm text-accent font-semibold">{edu.status}</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function About() {
   const containerVariants = {
@@ -137,24 +228,9 @@ export default function About() {
               Education
             </motion.h3>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="p-6 glassmorphism rounded-lg border border-accent/20 hover:border-accent/50 transition-all hover:bg-card/50"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2">
-                      <h4 className="text-xl font-bold text-accent">{edu.title}</h4>
-                      <p className="text-lg text-gray-200">{edu.field}</p>
-                      <p className="text-gray-400">{edu.school}</p>
-                    </div>
-                    <div className="px-4 py-2 bg-accent/10 border border-accent/30 rounded-lg">
-                      <p className="text-sm text-accent font-semibold">{edu.status}</p>
-                    </div>
-                  </div>
-                </motion.div>
+                <EducationCard key={index} edu={edu} idx={index} />
               ))}
             </div>
           </motion.div>

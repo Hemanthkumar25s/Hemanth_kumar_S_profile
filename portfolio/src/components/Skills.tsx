@@ -1,7 +1,118 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Typewriter from './Typewriter'
+
+function SkillCard({ category, idx }: { category: { category: string; icon: string; skills: string[] }; idx: number }) {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 })
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 })
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg'])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    x.set((e.clientX - rect.left) / rect.width - 0.5)
+    y.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: idx * 0.08 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+        perspective: 1000,
+      }}
+      className="group relative"
+    >
+      {/* Animated gradient border ring */}
+      <motion.div
+        animate={{
+          background: [
+            'linear-gradient(45deg, rgba(0,247,255,0.4), rgba(99,102,241,0.3), rgba(168,85,247,0.3), rgba(0,247,255,0.4))',
+            'linear-gradient(225deg, rgba(0,247,255,0.4), rgba(99,102,241,0.3), rgba(168,85,247,0.3), rgba(0,247,255,0.4))',
+            'linear-gradient(45deg, rgba(0,247,255,0.4), rgba(99,102,241,0.3), rgba(168,85,247,0.3), rgba(0,247,255,0.4))',
+          ],
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+        className="absolute -inset-[1.5px] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
+        style={{ zIndex: 0 }}
+      />
+
+      {/* Flowing gradient background */}
+      <motion.div
+        animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-15 transition-opacity duration-500"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0,247,255,0.15), rgba(99,102,241,0.1), rgba(168,85,247,0.1))',
+          backgroundSize: '200% 200%',
+        }}
+      />
+
+      {/* Shimmer scan line */}
+      <motion.div
+        animate={{
+          top: ['-10%', '110%'],
+          opacity: [0, 0.5, 0],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.25 }}
+        className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      />
+
+      <div
+        className="relative p-6 glassmorphism rounded-xl border border-accent/20 group-hover:border-accent/50 transition-all duration-300 h-full"
+        style={{ transformStyle: 'preserve-3d', transform: 'translateZ(20px)' }}
+      >
+        <div className="space-y-4">
+          <div className="flex items-center gap-3" style={{ transformStyle: 'preserve-3d', transform: 'translateZ(30px)' }}>
+            <span className="text-3xl">{category.icon}</span>
+            <h3 className="text-xl font-bold text-accent group-hover:text-cyan-300 transition-colors">
+              {category.category}
+            </h3>
+          </div>
+
+          <div
+            className="flex flex-wrap gap-2"
+            style={{ transformStyle: 'preserve-3d', transform: 'translateZ(40px)' }}
+          >
+            {category.skills.map((skill, i) => (
+              <motion.span
+                key={i}
+                whileHover={{ scale: 1.15 }}
+                className="px-3 py-1 bg-accent/10 border border-accent/30 text-sm text-accent rounded-full hover:bg-accent/20 transition-colors cursor-default"
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+
+        {/* Animated background pulse */}
+        <motion.div
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 rounded-xl pointer-events-none"
+        />
+      </div>
+    </motion.div>
+  )
+}
 
 export default function Skills() {
   const skillCategories = [
@@ -47,14 +158,6 @@ export default function Skills() {
     },
   }
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
 
   return (
     <section id="skills" className="relative py-20 px-4 bg-gradient-to-b from-transparent via-card/30 to-transparent">
@@ -92,40 +195,7 @@ export default function Skills() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {skillCategories.map((category, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 247, 255, 0.2)' }}
-                className="group p-6 glassmorphism rounded-xl border border-accent/20 hover:border-accent/50 transition-all duration-300"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{category.icon}</span>
-                    <h3 className="text-xl font-bold text-accent group-hover:text-cyan-300 transition-colors">
-                      {category.category}
-                    </h3>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, i) => (
-                      <motion.span
-                        key={i}
-                        whileHover={{ scale: 1.1 }}
-                        className="px-3 py-1 bg-accent/10 border border-accent/30 text-sm text-accent rounded-full hover:bg-accent/20 transition-colors cursor-default"
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Animated background */}
-                <motion.div
-                  animate={{ opacity: [0.3, 0.6, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 rounded-xl pointer-events-none"
-                />
-              </motion.div>
+              <SkillCard key={idx} category={category} idx={idx} />
             ))}
           </motion.div>
 
