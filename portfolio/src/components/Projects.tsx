@@ -9,7 +9,7 @@ export default function Projects() {
       title: 'GramaYatri', 
       description: 'Helping rural commuters track their buses in real-time and skip the wait with community-powered live arrival estimates',
       tags: ['Kotlin', 'Jetpack Compose', 'Firebase', 'Room'],
-      status: 'In Progress',
+      status: 'Completed',
       link: 'https://github.com/Hemanthkumar25s/GramaYatri',
       color: 'from-green-500 to-emerald-600',
     },

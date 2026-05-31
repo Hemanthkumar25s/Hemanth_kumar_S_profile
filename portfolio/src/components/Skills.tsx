@@ -129,39 +129,92 @@ export default function Skills() {
             ))}
           </motion.div>
 
-          {/* Proficiency bars */}
+          {/* Core Competencies — Enhanced */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="space-y-6 mt-12"
+            className="mt-16"
           >
-            <h3 className="text-2xl font-bold text-white">Core Competencies</h3>
+            {/* Section header */}
+            <div className="text-center space-y-3 mb-10">
+              <div className="flex items-center justify-center gap-2">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent/60" />
+                <span className="text-xs uppercase tracking-[0.3em] text-accent font-semibold">Core Competencies</span>
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent/60" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">Technical Proficiency</h3>
+              <p className="text-gray-400 max-w-xl mx-auto text-sm">
+                Estimated proficiency levels across key technical domains
+              </p>
+            </div>
 
-            {[
-              { label: 'Full Stack Development', value: 85 },
-              { label: 'Mobile Development', value: 75 },
-              { label: 'Frontend Design', value: 80 },
-              { label: 'Backend Architecture', value: 78 },
-              { label: 'Database Management', value: 72 },
-            ].map((skill, idx) => (
-              <motion.div key={idx} className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <p className="text-gray-300 font-medium">{skill.label}</p>
-                  <p className="text-accent font-bold">{skill.value}%</p>
-                </div>
-                <div className="h-2 bg-card rounded-full overflow-hidden border border-accent/20">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.value}%` }}
-                    transition={{ duration: 1, ease: 'easeOut', delay: idx * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full bg-gradient-to-r from-accent via-blue-400 to-cyan-300"
-                  />
-                </div>
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {[
+                { label: 'Full Stack Development', value: 85, icon: '🌐', gradient: 'from-accent via-blue-400 to-cyan-300' },
+                { label: 'Mobile Development', value: 75, icon: '📱', gradient: 'from-green-400 via-emerald-500 to-teal-400' },
+                { label: 'Frontend Design', value: 80, icon: '🎨', gradient: 'from-purple-400 via-violet-500 to-pink-400' },
+                { label: 'Backend Architecture', value: 78, icon: '⚙️', gradient: 'from-indigo-400 via-blue-500 to-violet-400' },
+                { label: 'Database Management', value: 72, icon: '🗄️', gradient: 'from-rose-400 via-orange-400 to-amber-400' },
+              ].map((skill, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02 }}
+                  className="group p-5 glassmorphism rounded-xl border border-accent/10 hover:border-accent/40 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-2xl">{skill.icon}</span>
+                    <div className="flex-1">
+                      <p className="text-gray-200 font-semibold group-hover:text-white transition-colors">{skill.label}</p>
+                    </div>
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: idx * 0.1 + 0.4 }}
+                      viewport={{ once: true }}
+                      className="text-lg font-bold text-accent tabular-nums"
+                    >
+                      {skill.value}%
+                    </motion.span>
+                  </div>
+
+                  <div className="relative h-3 bg-dark/60 rounded-full overflow-hidden border border-accent/10">
+                    {/* Shimmer background */}
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.value}%` }}
+                      transition={{ duration: 1.2, ease: 'easeOut', delay: idx * 0.15 }}
+                      viewport={{ once: true }}
+                      className={`h-full rounded-full bg-gradient-to-r ${skill.gradient} relative overflow-hidden`}
+                    >
+                      {/* Shimmer overlay */}
+                      <motion.div
+                        animate={{ x: ['-100%', '200%'] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: idx * 0.3 }}
+                        className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg]"
+                      />
+                    </motion.div>
+                  </div>
+
+                  {/* Dot indicators for granularity */}
+                  <div className="flex justify-between mt-1.5 px-0.5">
+                    {[0, 25, 50, 75, 100].map((dot) => (
+                      <div
+                        key={dot}
+                        className={`w-1 h-1 rounded-full transition-colors duration-300 ${
+                          skill.value >= dot ? 'bg-accent/40' : 'bg-gray-600/30'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </div>

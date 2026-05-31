@@ -16,28 +16,6 @@ const services = [
   },
 ]
 
-function Competency({ label, percent, color }: { label: string; percent: number; color: string }) {
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-white font-medium">{label}</span>
-        <span className="text-sm text-gray-400">{percent}%</span>
-      </div>
-
-      <div className="w-full bg-card/30 rounded-full h-3">
-        <div
-          role="progressbar"
-          aria-valuenow={percent}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          className={`${color} h-3 rounded-full shadow-sm transition-all`} 
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-    </div>
-  )
-}
-
 export default function WhatIDo() {
   return (
     <section className="relative py-20 px-4">
@@ -75,27 +53,6 @@ export default function WhatIDo() {
           ))}
         </div>
 
-        {/* Core Competencies */}
-        <div className="mt-10">
-          <div className="mb-6">
-            <p className="uppercase tracking-[0.3em] text-accent text-sm font-semibold">Core Competencies</p>
-            <h3 className="text-2xl md:text-3xl font-bold mt-2">Full Stack & Technical Skills</h3>
-            <p className="text-gray-400 mt-2 max-w-2xl">Skill proficiency shown as estimated percentages. These reflect recent work and learning focus areas.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <Competency label="Full Stack Development" percent={85} color="bg-gradient-to-r from-accent to-blue-400" />
-              <Competency label="Mobile Development" percent={75} color="bg-gradient-to-r from-green-400 to-emerald-500" />
-              <Competency label="Frontend Design" percent={80} color="bg-gradient-to-r from-purple-500 to-pink-500" />
-            </div>
-
-            <div className="space-y-4">
-              <Competency label="Backend Architecture" percent={78} color="bg-gradient-to-r from-indigo-500 to-violet-500" />
-              <Competency label="Database Management" percent={72} color="bg-gradient-to-r from-rose-500 to-orange-400" />
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
