@@ -17,8 +17,8 @@ This site is a dark-themed portfolio built to present:
 - Clear links to projects, resume, and contact details
 - Responsive presentation on desktop and mobile
 
-## 👨‍💻 About Hemanth
-Hemanth is a student developer focused on building thoughtful web and mobile experiences.
+## 👨‍💻 About Me
+I is a student developer focused on building thoughtful web and mobile experiences.
 
 He brings together:
 
