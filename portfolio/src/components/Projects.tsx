@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Typewriter from './Typewriter'
 
 export default function Projects() {
   const projects = [
@@ -88,9 +89,12 @@ export default function Projects() {
             <motion.h2
               className="text-4xl md:text-5xl font-bold"
             >
-              <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">
-                Featured Projects
-              </span>
+              <Typewriter
+                text="Featured Projects"
+                className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent"
+                speed={80}
+                delay={200}
+              />
             </motion.h2>
             <motion.div className="flex justify-center">
               <div className="w-20 h-1 bg-gradient-to-r from-accent to-blue-400 rounded-full" />

@@ -68,6 +68,19 @@ a, button {
   border: 1px solid rgba(0, 247, 255, 0.1);
 }
 
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 0.2rem;
+  width: 0.9rem;
+  animation: blink-caret 0.75s step-end infinite;
+  color: rgba(0, 247, 255, 0.85);
+}
+
+@keyframes blink-caret {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}
+
 /* Hover glow effect */
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(0, 247, 255, 0.4);
@@ -92,6 +105,24 @@ a, button {
 
 .pulse-glow {
   animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes bg-pan {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(12%, 8%); }
+}
+
+.animate-bg-pan {
+  animation: bg-pan 25s ease-in-out infinite;
+}
+
+@keyframes bg-pan-reverse {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-12%, -8%); }
+}
+
+.animate-bg-pan-reverse {
+  animation: bg-pan-reverse 22s ease-in-out infinite;
 }
 
 .section-heading {
