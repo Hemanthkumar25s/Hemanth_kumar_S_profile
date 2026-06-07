@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import '../globals.css'
 import CursorPet from '@/components/CursorPet'
+import PersonalAssistant from '@/components/PersonalAssistant'
 
 export const metadata: Metadata = {
   title: {
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body className="bg-dark text-white">
         {children}
         <CursorPet />
+        <PersonalAssistant />
       </body>
     </html>
   )

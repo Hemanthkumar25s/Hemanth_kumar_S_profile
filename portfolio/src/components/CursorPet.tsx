@@ -135,7 +135,7 @@ export default function CursorPet() {
   return (
     <motion.div
       ref={petRef}
-      className="fixed bottom-5 right-5 z-50 select-none"
+      className="fixed bottom-5 left-5 z-40 select-none"
       animate={isSleeping ? { scale: 0.85, opacity: 0.6 } : { scale: 1, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 18 }}
       onMouseEnter={() => setIsHovered(true)}
@@ -152,7 +152,7 @@ export default function CursorPet() {
           height="78"
           viewBox="-5 -5 80 88"
           className="drop-shadow-lg"
-          style={{ filter: 'drop-shadow(0 4px 12px rgba(0,247,255,0.2))' }}
+          style={{ filter: 'drop-shadow(0 4px 12px rgba(255,255,255,0.15))' }}
           aria-hidden="true"
         >
           {/* === TAIL (fluffy pom-pom) === */}
@@ -164,24 +164,24 @@ export default function CursorPet() {
               cy="46"
               rx="6"
               ry="5.5"
-              fill="#FFF0DB"
+              fill="#F5F5F5"
               style={{ transformOrigin: '54 46' }}
             />
           ) : (
-            <ellipse cx="54" cy="46" rx="6" ry="5.5" fill="#FFF0DB" />
+            <ellipse cx="54" cy="46" rx="6" ry="5.5" fill="#F5F5F5" />
           )}
 
           {/* === BODY === */}
-          <ellipse cx="35" cy="52" rx="16" ry="17" fill="#C4956A" />
+          <ellipse cx="35" cy="52" rx="16" ry="17" fill="#FFFFFF" />
           {/* Belly */}
-          <ellipse cx="35" cy="54" rx="9" ry="10" fill="#FFF0DB" />
+          <ellipse cx="35" cy="54" rx="9" ry="10" fill="#FEFEFE" />
 
           {/* === PAWS === */}
-          <ellipse cx="24" cy="66" rx="5" ry="3.5" fill="#C4956A" />
-          <ellipse cx="46" cy="66" rx="5" ry="3.5" fill="#C4956A" />
+          <ellipse cx="24" cy="66" rx="5" ry="3.5" fill="#FFFFFF" />
+          <ellipse cx="46" cy="66" rx="5" ry="3.5" fill="#FFFFFF" />
           {/* Paw pads */}
-          <ellipse cx="24" cy="66" rx="2.5" ry="1.8" fill="#DBA878" opacity="0.6" />
-          <ellipse cx="46" cy="66" rx="2.5" ry="1.8" fill="#DBA878" opacity="0.6" />
+          <ellipse cx="24" cy="66" rx="2.5" ry="1.8" fill="#FFD1DC" opacity="0.6" />
+          <ellipse cx="46" cy="66" rx="2.5" ry="1.8" fill="#FFD1DC" opacity="0.6" />
 
           {/* === LEFT EAR === */}
           <motion.ellipse
@@ -189,7 +189,7 @@ export default function CursorPet() {
             cy="13"
             rx="5"
             ry="16"
-            fill="#C4956A"
+            fill="#FFFFFF"
             style={{ transformOrigin: '18 26' }}
             animate={reducedMotion ? {} : { rotate: leftEarAngle }}
             transition={{ type: 'spring', stiffness: 180, damping: 16 }}
@@ -212,7 +212,7 @@ export default function CursorPet() {
             cy="13"
             rx="5"
             ry="16"
-            fill="#C4956A"
+            fill="#FFFFFF"
             style={{ transformOrigin: '52 26' }}
             animate={reducedMotion ? {} : { rotate: rightEarAngle }}
             transition={{ type: 'spring', stiffness: 180, damping: 16 }}
@@ -230,12 +230,12 @@ export default function CursorPet() {
           />
 
           {/* === FACE === */}
-          <ellipse cx="35" cy="37" rx="13" ry="11" fill="#D4A574" />
+          <ellipse cx="35" cy="37" rx="13" ry="11" fill="#FFFFFF" />
 
           {/* Cheek fluff left */}
-          <ellipse cx="23" cy="39" rx="4.5" ry="3.5" fill="#D4A574" />
+          <ellipse cx="23" cy="39" rx="4.5" ry="3.5" fill="#FFFFFF" />
           {/* Cheek fluff right */}
-          <ellipse cx="47" cy="39" rx="4.5" ry="3.5" fill="#D4A574" />
+          <ellipse cx="47" cy="39" rx="4.5" ry="3.5" fill="#FFFFFF" />
 
           {/* === LEFT EYE === */}
           <g>
