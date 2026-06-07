@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -29,9 +30,17 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <motion.div
             whileHover={{ scale: 1.1 }}
-            className="text-2xl font-bold bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent"
+            className="flex items-center gap-2"
           >
-            HK
+            <Link href="/">
+              <Image
+                src="/profile.jpeg"
+                alt="Hemanth Kumar S"
+                width={36}
+                height={36}
+                className="rounded-full border-2 border-accent/50 object-cover"
+              />
+            </Link>
           </motion.div>
 
           {/* Desktop menu */}

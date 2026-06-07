@@ -98,8 +98,8 @@ test.describe('Home Page', () => {
     await expect(hero.getByRole('link', { name: 'View Resume' })).toBeVisible()
     await expect(hero.getByRole('link', { name: 'Get in Touch' })).toBeVisible()
 
-    // Check profile image
-    await expect(page.locator('img[alt="Hemanth Kumar S"]')).toBeVisible()
+    // Check profile image in the hero section
+    await expect(hero.locator('img[alt="Hemanth Kumar S"]')).toBeVisible()
 
     // Check social icons
     await expect(hero.locator('a[title="GitHub"]')).toBeVisible()
@@ -371,11 +371,11 @@ test.describe('Cross-Page Consistency', () => {
     await expect(page).toHaveTitle(/Hemanth Kumar S/)
   })
 
-  test('HK brand logo should be visible on all pages', async ({ page }) => {
+  test('photo logo should be visible on all pages', async ({ page }) => {
     const urls = ['/', '/about', '/skills', '/projects', '/resume', '/contact']
     for (const url of urls) {
       await gotoPage(page, url)
-      await expect(page.locator('nav').getByText('HK')).toBeVisible()
+      await expect(page.locator('nav img[alt="Hemanth Kumar S"]')).toBeVisible()
     }
   })
 
